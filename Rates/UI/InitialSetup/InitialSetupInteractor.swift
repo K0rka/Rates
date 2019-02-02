@@ -8,23 +8,50 @@
 
 import Foundation
 
+class InitialSetupLauncher: NSObject {
+    
+    @IBOutlet weak var networkFactory: NetworkProvidersFactory!
+    var interactor: InitialSetupInteractor!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        interactor = InitialSetupInteractor()
+        let networkProvider = networkFactory.currencyInfoNetworkProvider()
+        let dataStorage = DataStorageImplementation()
+        interactor.networkProvider = networkProvider
+        interactor.dataStorage = dataStorage
+        interactor.performSetup()
+    }
+    
+    deinit {
+        print("something")
+    }
+}
+
 class InitialSetupInteractor {
     
     var networkProvider: CurrencyInfoNetworkProvider!
+    var dataStorage: DataStorage!
     
     func performSetup() {
-        
-        networkProvider.getCurrenciesInfo { (currencies, error) in
-            guard let currencies = currencies else {
-                
+        guard !dataStorage.hasCurrenciesInfo() else {
+            return
+        }
+        networkProvider.getCurrenciesInfo {[weak self] (currencies, error) in
+            guard let currenciesInfo = currencies,
+                error == nil else {
+                self?.retrySetup()
                 return
             }
-            if let _ = error {
-                
-            }
-            
+            self?.dataStorage.save(currenciesInfo: currenciesInfo)
         }
-        
+    }
+    
+    func retrySetup() {
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: false) {[weak self] (timer) in
+            self?.performSetup()
+            timer.invalidate()
+        }
     }
     
 }

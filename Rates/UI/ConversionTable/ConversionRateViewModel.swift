@@ -9,9 +9,21 @@
 import UIKit
 
 struct ConversionRateViewModel {
-    let image: UIImage
+    let image: UIImage?
     let rate: Double
     let code: String
     let name: String
-    let conversionDelegate: UITextFieldDelegate
+    let conversionDelegate: CurrencyValueChangeDelegate?
+}
+
+extension ConversionRateViewModel: Comparable {
+    static func < (lhs: ConversionRateViewModel, rhs: ConversionRateViewModel) -> Bool {
+        return lhs.code < rhs.code
+    }
+    
+    static func == (lhs: ConversionRateViewModel, rhs: ConversionRateViewModel) -> Bool {
+        return lhs.code == rhs.code
+    }
+    
+    
 }

@@ -6,15 +6,18 @@
 //  Copyright © 2562 snm. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class ConversionsPresenter: ConversionsViewOutput, ConversionsViewInteractorOutput {
+class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInteractorOutput {
 
     var interactor: ConversionsViewInteractorInput!
     weak var view: ConversionsViewInput!
+    var converter: ConversionViewModelConverter!
+    var multiplier: Double = 1
+//    var showedData: [ConversionRateViewModel]
     
     func viewIsReady() {
-        interactor.getCurrentRates()
+        interactor.fetchCurrentRates()
         view.showLoading()
     }
     
@@ -29,7 +32,24 @@ class ConversionsPresenter: ConversionsViewOutput, ConversionsViewInteractorOutp
     func didGet(rates: [CurrencyRate]) {
         if rates.isEmpty {
             view.showNoResultsView()
+        } else {
+            let data = converter.convert(rates: rates, multiplier: 1, conversionDelegate: self)
+            view.show(rates: data)
         }
     }
+}
+
+extension ConversionsPresenter: CurrencyValueChangeDelegate {
+    func text(willChangeTo newText: String, for currencyViewModel: ConversionRateViewModel?) {
+        guard let viewModel = currencyViewModel,
+            let newValue = Double(newText),
+            let rate = interactor.currentRates.first(where: { (rate) -> Bool in
+                rate.code == viewModel.code
+            }) else {
+            return
+        }
+        multiplier = newValue/rate.rate
+    }
     
+
 }

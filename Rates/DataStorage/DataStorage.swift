@@ -19,6 +19,7 @@ class DataStorageImplementation: DataStorage {
     
     func save(currenciesInfo: [String: String]) {
         UserDefaults.standard.set(currenciesInfo, forKey: "CurrenciesInfo")
+        UserDefaults.standard.set(true, forKey: "HasCurrenciesInfo")
     }
     
     func retrieveCurrenciesInfo() -> [String: String] {

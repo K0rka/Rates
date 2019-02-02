@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CurrencyValueChangeDelegate: class {
+    func text(willChangeTo newText: String, for currencyViewModel: ConversionRateViewModel?)
+}
+
 class ConversionCell: UITableViewCell {
 
     @IBOutlet weak var rateTextfield: UITextField!
@@ -15,19 +19,43 @@ class ConversionCell: UITableViewCell {
     @IBOutlet weak var currencyCodeLabel: UILabel!
     @IBOutlet weak var currencyImageView: UIImageView!
     
-    weak var conversionDelegate: UITextFieldDelegate?
+    var viewModel: ConversionRateViewModel?
+    weak var conversionDelegate: CurrencyValueChangeDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel = nil
+    }
+    
     func configure(with viewModel: ConversionRateViewModel) {
-        
+        self.viewModel = viewModel
+        if !rateTextfield.isEditing {
+            rateTextfield.text = String(format: "%.3f", viewModel.rate)
+        }
+        currencyCodeLabel.text = viewModel.code
+        currencyImageView.image = viewModel.image
+        currencyNameLabel.text = viewModel.name
+        conversionDelegate = viewModel.conversionDelegate
     }
     
     func handleSelection() {
         rateTextfield.becomeFirstResponder()
     }
     
+}
+
+extension ConversionCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let swiftRange = Range(range, in: textField.text ?? "") {
+            let futureString = textField.text?.replacingCharacters(in: swiftRange, with: string) ?? ""
+            conversionDelegate?.text(willChangeTo: futureString, for: viewModel)
+        }
+        
+        return true
+    }
 }

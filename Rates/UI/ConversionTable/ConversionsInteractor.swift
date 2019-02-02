@@ -14,13 +14,13 @@ class ConversionsInteractor: ConversionsViewInteractorInput {
     weak var presenter: ConversionsViewInteractorOutput?
     
     var timer: Timer?
-
+    var currentRates: [CurrencyRate] = [CurrencyRate]()
     func stopUpdatingRates() {
         timer?.invalidate()
         timer = nil
     }
     
-    func getCurrentRates() {
+    func fetchCurrentRates() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {[weak self] (timer) in
             self?.fetchData()
         }
@@ -37,6 +37,7 @@ class ConversionsInteractor: ConversionsViewInteractorInput {
                 self?.presenter?.didFailToGetRates()
                 return
             }
+            self?.currentRates = rates
             self?.presenter?.didGet(rates: rates)
         }
     }

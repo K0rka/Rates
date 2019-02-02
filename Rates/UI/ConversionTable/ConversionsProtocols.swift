@@ -20,8 +20,9 @@ protocol ConversionsViewOutput {
 }
 
 protocol ConversionsViewInteractorInput {
-    func getCurrentRates()
+    func fetchCurrentRates()
     func stopUpdatingRates()
+    var currentRates: [CurrencyRate] {get}
 }
 
 protocol ConversionsViewInteractorOutput: class {

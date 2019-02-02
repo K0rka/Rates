@@ -14,20 +14,20 @@ protocol CurrencyRatesMapper {
 
 class CurrencyRatesMapperImplementation: CurrencyRatesMapper {
     func map(jsonDict: [String: Any]) -> [CurrencyRate] {
-        guard let currenciesArray = jsonDict["rates"] as? [[String: Double]] else {
+        guard let currenciesDict = jsonDict["rates"] as? [String: Double] else {
             return []
         }
-         var rates = [CurrencyRate]()
+        var rates = [CurrencyRate]()
         
-        currenciesArray.forEach { (nextDict) in
-            let key = nextDict.keys.first ?? ""
-            let value = nextDict[key]
+        currenciesDict.forEach { (key, value) in
             let rate = CurrencyRate(
                 code: key,
-                rate: value ?? 0.0)
+                rate: value)
             rates.append(rate)
+            
         }
-     
+        
+        
         return rates
     }
 }

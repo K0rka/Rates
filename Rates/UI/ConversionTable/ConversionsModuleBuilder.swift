@@ -23,9 +23,14 @@ class ConversionsModuleBuilder {
         let presenter = ConversionsPresenter()
         let interactor = ConversionsInteractor()
         let networkProvider = networkFactory.ratesNetworkProvider()
+        let converter = ConversionViewModelConverterImplementation()
+        let dataStorage = DataStorageImplementation()
+        converter.dataStorage = dataStorage
         viewController.presenter = presenter
         presenter.interactor = interactor
+        presenter.converter = converter
         presenter.view = viewController
         interactor.presenter = presenter
+        interactor.networkProvider = networkProvider
     }
 }
