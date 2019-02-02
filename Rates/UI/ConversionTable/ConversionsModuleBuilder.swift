@@ -7,3 +7,25 @@
 //
 
 import Foundation
+
+
+class ConversionModuleInitializer: NSObject {
+    @IBOutlet weak var viewController: ConversionsViewController!
+    @IBOutlet weak var networkFactory: NetworkProvidersFactory!
+
+    override func awakeFromNib() {
+        ConversionsModuleBuilder().build(for: viewController, networkFactory: networkFactory)
+    }
+}
+
+class ConversionsModuleBuilder {
+    func build(for viewController: ConversionsViewController, networkFactory: NetworkProvidersFactory) {
+        let presenter = ConversionsPresenter()
+        let interactor = ConversionsInteractor()
+        let networkProvider = networkFactory.ratesNetworkProvider()
+        viewController.presenter = presenter
+        presenter.interactor = interactor
+        presenter.view = viewController
+        interactor.presenter = presenter
+    }
+}

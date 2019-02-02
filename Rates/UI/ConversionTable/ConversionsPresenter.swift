@@ -7,3 +7,29 @@
 //
 
 import Foundation
+
+class ConversionsPresenter: ConversionsViewOutput, ConversionsViewInteractorOutput {
+
+    var interactor: ConversionsViewInteractorInput!
+    weak var view: ConversionsViewInput!
+    
+    func viewIsReady() {
+        interactor.getCurrentRates()
+        view.showLoading()
+    }
+    
+    func viewIsHiding() {
+        interactor.stopUpdatingRates()
+    }
+    
+    func didFailToGetRates() {
+        view.showNoResultsView()
+    }
+    
+    func didGet(rates: [CurrencyRate]) {
+        if rates.isEmpty {
+            view.showNoResultsView()
+        }
+    }
+    
+}

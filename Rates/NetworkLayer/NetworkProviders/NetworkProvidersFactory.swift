@@ -12,7 +12,7 @@ enum HTTPStatusCode: Int {
     case success = 200
 }
 
-class NetworkProvidersFactory {
+class NetworkProvidersFactory: NSObject {
 
     func settings() -> NSDictionary? {
         var nsDictionary: NSDictionary?

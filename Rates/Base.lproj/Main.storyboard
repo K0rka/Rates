@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-873" y="158"/>
         </scene>
-        <!--Conversions View Controller-->
+        <!--View Controller-->
         <scene sceneID="S4j-W5-ZPv">
             <objects>
                 <viewController id="bP8-vr-Fa9" customClass="ConversionsViewController" customModule="Rates" customModuleProvider="target" sceneMemberID="viewController">
@@ -180,6 +180,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYE-aH-63X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="64K-dD-hq2" customClass="ConversionModuleInitializer" customModule="Rates" customModuleProvider="target">
+                    <connections>
+                        <outlet property="networkFactory" destination="oWb-9a-RHB" id="K4J-ik-JhB"/>
+                        <outlet property="viewController" destination="bP8-vr-Fa9" id="36l-ZT-fOi"/>
+                    </connections>
+                </customObject>
+                <customObject id="oWb-9a-RHB" customClass="NetworkProvidersFactory" customModule="Rates" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="140" y="158"/>
         </scene>

@@ -8,19 +8,51 @@
 
 import UIKit
 
-class ConversionsViewController: UIViewController {
+class ConversionsViewController: UIViewController, ConversionsViewInput {
 
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var errorView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    var presenter: ConversionsViewOutput!
+    
     var dataToShow = [ConversionRateViewModel]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        presenter.viewIsReady()
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewIsReady()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter.viewIsHiding()
+    }
+    
+    func showNoResultsView() {
+        loadingView.isHidden = true
+        tableView.isHidden = true
+        errorView.isHidden = false
+    }
+    
+    func showLoading() {
+        loadingView.isHidden = false
+        tableView.isHidden = true
+        errorView.isHidden = true
 
     }
     
+    func show(rates: [ConversionRateViewModel]) {
+        loadingView.isHidden = true
+        tableView.isHidden = false
+        errorView.isHidden = true
+        dataToShow = rates
+        tableView.reloadData()
+    }
 
 }
 

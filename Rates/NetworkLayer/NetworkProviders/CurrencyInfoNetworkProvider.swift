@@ -15,7 +15,7 @@ enum CurrenciesInfoError: Error {
 }
 
 protocol CurrencyInfoNetworkProvider {
-    
+    func getCurrenciesInfo(completion: @escaping ([String: String]?, Error?) -> Void)
 }
 
 class CurrencyInfoNetworkProviderImplementation: CurrencyInfoNetworkProvider {
