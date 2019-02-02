@@ -11,6 +11,7 @@ import Alamofire
 
 enum CurrenciesInfoError: Error {
     case couldntCreateURL
+    case couldntFetchInfo
 }
 
 protocol CurrencyInfoNetworkProvider {
@@ -20,24 +21,37 @@ protocol CurrencyInfoNetworkProvider {
 class CurrencyInfoNetworkProviderImplementation: CurrencyInfoNetworkProvider {
     
     private let baseUrl: String
-    private let mapper: Any
+    private let mapper: CurrencyInfoMapper
     
     
     init(baseUrl: String,
-         infoMapper: Any) {
+         infoMapper: CurrencyInfoMapper) {
         self.baseUrl = baseUrl
         mapper = infoMapper
     }
     
-    func getCurrenciesInfo(completion: @escaping ([Any]?, Error?) -> Void) {
+    func getCurrenciesInfo(completion: @escaping ([String: String]?, Error?) -> Void) {
         let urlString = baseUrl + InfoEndpoints.currencies.rawValue
         guard let url = URL(string: urlString) else {
             completion(nil, CurrenciesInfoError.couldntCreateURL)
             return
         }
         Alamofire.request(url)
-            .response {[weak self] (fullResponse) in
-                
+            .response {[weak self] (response) in
+                do {
+                    guard let data = response.data,
+                        let jsonDict = try JSONSerialization.jsonObject(
+                            with: data, options: .mutableContainers) as? [String: Any] else {
+                                completion(nil, CurrenciesInfoError.couldntFetchInfo)
+                                return
+                    }
+                    
+                    let result = self?.mapper.map(jsonDict: jsonDict)
+                    completion(result, nil)
+                    
+                } catch {
+                    completion(nil, CurrenciesInfoError.couldntFetchInfo)
+                }
         }
     }
 }
