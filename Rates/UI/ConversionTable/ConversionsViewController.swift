@@ -18,11 +18,6 @@ class ConversionsViewController: UIViewController, ConversionsViewInput {
     
     var dataToShow = [ConversionRateViewModel]()
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        presenter.viewIsReady()
-//    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter.viewIsReady()
@@ -50,8 +45,19 @@ class ConversionsViewController: UIViewController, ConversionsViewInput {
         loadingView.isHidden = true
         tableView.isHidden = false
         errorView.isHidden = true
-        dataToShow = rates
-        tableView.reloadData()
+        if dataToShow.count != rates.count {
+            dataToShow = rates
+            tableView.reloadData()
+        } else {
+            dataToShow = rates
+            let visible = tableView.indexPathsForVisibleRows
+            visible?.forEach({ (index) in
+                guard index != tableView.indexPathForSelectedRow else {
+                    return
+                }
+                tableView.reloadRows(at: [index], with: .none)
+            })
+        }
     }
 
 }
@@ -77,5 +83,10 @@ extension ConversionsViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if let selectedIndex = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndex, animated: false)
+        }
+        scrollView.endEditing(true)
+    }
 }

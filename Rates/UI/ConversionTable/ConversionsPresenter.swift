@@ -33,7 +33,7 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
         if rates.isEmpty {
             view.showNoResultsView()
         } else {
-            let data = converter.convert(rates: rates, multiplier: 1, conversionDelegate: self)
+            let data = converter.convert(rates: rates, multiplier: multiplier, conversionDelegate: self)
             view.show(rates: data)
         }
     }
@@ -41,14 +41,17 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
 
 extension ConversionsPresenter: CurrencyValueChangeDelegate {
     func text(willChangeTo newText: String, for currencyViewModel: ConversionRateViewModel?) {
+        let newValue = Double(newText) ?? 1
+
         guard let viewModel = currencyViewModel,
-            let newValue = Double(newText),
             let rate = interactor.currentRates.first(where: { (rate) -> Bool in
                 rate.code == viewModel.code
             }) else {
+                
             return
         }
         multiplier = newValue/rate.rate
+        didGet(rates: interactor.currentRates)
     }
     
 

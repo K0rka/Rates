@@ -24,29 +24,37 @@ class ConversionCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        rateTextfield.delegate = self
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        viewModel = nil
+//        viewModel = nil
     }
     
     func configure(with viewModel: ConversionRateViewModel) {
-        self.viewModel = viewModel
         if !rateTextfield.isEditing {
             rateTextfield.text = String(format: "%.3f", viewModel.rate)
         }
-        currencyCodeLabel.text = viewModel.code
-        currencyImageView.image = viewModel.image
-        currencyNameLabel.text = viewModel.name
-        conversionDelegate = viewModel.conversionDelegate
+        if self.viewModel != viewModel {
+            currencyCodeLabel.text = viewModel.code
+            currencyImageView.image = viewModel.image
+            currencyNameLabel.text = viewModel.name
+            conversionDelegate = viewModel.conversionDelegate
+            self.viewModel = viewModel
+        }
     }
     
     func handleSelection() {
         rateTextfield.becomeFirstResponder()
     }
     
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if super.hitTest(point, with: event) == rateTextfield {
+            return nil
+        }
+        return super.hitTest(point, with: event)
+    }
 }
 
 extension ConversionCell: UITextFieldDelegate {
