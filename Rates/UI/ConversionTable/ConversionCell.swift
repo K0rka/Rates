@@ -34,7 +34,11 @@ class ConversionCell: UITableViewCell {
     
     func configure(with viewModel: ConversionRateViewModel) {
         if !rateTextfield.isEditing {
-            rateTextfield.text = String(format: "%.3f", viewModel.rate)
+            if viewModel.rate > 0 {
+                rateTextfield.text = String(format: "%.3f", viewModel.rate)
+            } else {
+                rateTextfield.text = ""
+            }
         }
         if self.viewModel != viewModel {
             currencyCodeLabel.text = viewModel.code

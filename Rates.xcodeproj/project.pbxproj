@@ -32,6 +32,10 @@
 		518D022C2205B0900020E8D3 /* ConversionViewModelConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D022B2205B0900020E8D3 /* ConversionViewModelConverter.swift */; };
 		518D022E2205B0EE0020E8D3 /* InitialSetupInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D022D2205B0EE0020E8D3 /* InitialSetupInteractor.swift */; };
 		518D02312205B1B70020E8D3 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D02302205B1B70020E8D3 /* DataStorage.swift */; };
+		518D02342206DDFA0020E8D3 /* CurrencyRatesMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D02332206DDFA0020E8D3 /* CurrencyRatesMapperTests.swift */; };
+		518D02362206DE360020E8D3 /* CurrencyInfoMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D02352206DE360020E8D3 /* CurrencyInfoMapperTests.swift */; };
+		518D02392206E2AB0020E8D3 /* InitialSetupInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D02382206E2AB0020E8D3 /* InitialSetupInteractorTests.swift */; };
+		518D023C2206E9670020E8D3 /* ConversionModuleBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D023B2206E9670020E8D3 /* ConversionModuleBuilderTests.swift */; };
 		5C9260AC18B180EAAA76F991 /* Pods_RatesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBABFE473AF4A3B5ADA924 /* Pods_RatesTests.framework */; };
 		B682D45D78BBE161B5D65CD7 /* Pods_Rates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B2A663F86DC609D2B13AD1 /* Pods_Rates.framework */; };
 /* End PBXBuildFile section */
@@ -86,6 +90,10 @@
 		518D022B2205B0900020E8D3 /* ConversionViewModelConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionViewModelConverter.swift; sourceTree = "<group>"; };
 		518D022D2205B0EE0020E8D3 /* InitialSetupInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupInteractor.swift; sourceTree = "<group>"; };
 		518D02302205B1B70020E8D3 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
+		518D02332206DDFA0020E8D3 /* CurrencyRatesMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRatesMapperTests.swift; sourceTree = "<group>"; };
+		518D02352206DE360020E8D3 /* CurrencyInfoMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfoMapperTests.swift; sourceTree = "<group>"; };
+		518D02382206E2AB0020E8D3 /* InitialSetupInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupInteractorTests.swift; sourceTree = "<group>"; };
+		518D023B2206E9670020E8D3 /* ConversionModuleBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionModuleBuilderTests.swift; sourceTree = "<group>"; };
 		92AD6ECB28F8382CA7AE4FF7 /* Pods-Rates.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rates.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rates/Pods-Rates.debug.xcconfig"; sourceTree = "<group>"; };
 		AEBD11E4677983000D1C2ADA /* Pods-Rates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rates.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rates/Pods-Rates.release.xcconfig"; sourceTree = "<group>"; };
 		B2B2A663F86DC609D2B13AD1 /* Pods_Rates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +171,8 @@
 		518D01EB220592860020E8D3 /* RatesTests */ = {
 			isa = PBXGroup;
 			children = (
+				518D02372206E2800020E8D3 /* UIClassesTests */,
+				518D02322206DDE20020E8D3 /* APITests */,
 				518D01EC220592860020E8D3 /* RatesTests.swift */,
 				518D01EE220592860020E8D3 /* Info.plist */,
 			);
@@ -191,7 +201,6 @@
 		518D0206220598660020E8D3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				518D021C2205A2F50020E8D3 /* RatesTable */,
 				518D021B2205A2E60020E8D3 /* ConversionTable */,
 				518D021A2205A2DC0020E8D3 /* InitialSetup */,
 			);
@@ -250,19 +259,38 @@
 			path = ConversionTable;
 			sourceTree = "<group>";
 		};
-		518D021C2205A2F50020E8D3 /* RatesTable */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RatesTable;
-			sourceTree = "<group>";
-		};
 		518D022F2205B1A10020E8D3 /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
 				518D02302205B1B70020E8D3 /* DataStorage.swift */,
 			);
 			path = DataStorage;
+			sourceTree = "<group>";
+		};
+		518D02322206DDE20020E8D3 /* APITests */ = {
+			isa = PBXGroup;
+			children = (
+				518D02332206DDFA0020E8D3 /* CurrencyRatesMapperTests.swift */,
+				518D02352206DE360020E8D3 /* CurrencyInfoMapperTests.swift */,
+			);
+			path = APITests;
+			sourceTree = "<group>";
+		};
+		518D02372206E2800020E8D3 /* UIClassesTests */ = {
+			isa = PBXGroup;
+			children = (
+				518D023A2206E9470020E8D3 /* ConversionTableTests */,
+				518D02382206E2AB0020E8D3 /* InitialSetupInteractorTests.swift */,
+			);
+			path = UIClassesTests;
+			sourceTree = "<group>";
+		};
+		518D023A2206E9470020E8D3 /* ConversionTableTests */ = {
+			isa = PBXGroup;
+			children = (
+				518D023B2206E9670020E8D3 /* ConversionModuleBuilderTests.swift */,
+			);
+			path = ConversionTableTests;
 			sourceTree = "<group>";
 		};
 		9810E9B9C18B0D7C52E7F7DC /* Pods */ = {
@@ -542,7 +570,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				518D02362206DE360020E8D3 /* CurrencyInfoMapperTests.swift in Sources */,
+				518D023C2206E9670020E8D3 /* ConversionModuleBuilderTests.swift in Sources */,
 				518D01ED220592860020E8D3 /* RatesTests.swift in Sources */,
+				518D02342206DDFA0020E8D3 /* CurrencyRatesMapperTests.swift in Sources */,
+				518D02392206E2AB0020E8D3 /* InitialSetupInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

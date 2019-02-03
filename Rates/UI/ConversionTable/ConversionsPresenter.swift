@@ -41,7 +41,7 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
 
 extension ConversionsPresenter: CurrencyValueChangeDelegate {
     func text(willChangeTo newText: String, for currencyViewModel: ConversionRateViewModel?) {
-        let newValue = Double(newText) ?? 1
+        let newValue = Double(newText) ?? 0
 
         guard let viewModel = currencyViewModel,
             let rate = interactor.currentRates.first(where: { (rate) -> Bool in
