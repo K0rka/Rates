@@ -14,7 +14,7 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
     weak var view: ConversionsViewInput!
     var converter: ConversionViewModelConverter!
     var multiplier: Double = 1
-//    var showedData: [ConversionRateViewModel]
+    var isViewResponsible = true
     
     func viewIsReady() {
         interactor.fetchCurrentRates()
@@ -33,6 +33,9 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
         if rates.isEmpty {
             view.showNoResultsView()
         } else {
+            guard isViewResponsible else {
+                return
+            }
             let data = converter.convert(rates: rates, multiplier: multiplier, conversionDelegate: self)
             view.show(rates: data)
         }
@@ -54,5 +57,12 @@ extension ConversionsPresenter: CurrencyValueChangeDelegate {
         didGet(rates: interactor.currentRates)
     }
     
+    func transitionStarted() {
+        isViewResponsible = false
+    }
+    
+    func transitionEnded() {
+        isViewResponsible = true
+    }
 
 }

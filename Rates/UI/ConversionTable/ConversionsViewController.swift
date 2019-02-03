@@ -20,11 +20,13 @@ class ConversionsViewController: UIViewController, ConversionsViewInput {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        registerNotifications()
         presenter.viewIsReady()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        unregisterNotifications()
         presenter.viewIsHiding()
     }
     
@@ -55,11 +57,35 @@ class ConversionsViewController: UIViewController, ConversionsViewInput {
                 guard index != tableView.indexPathForSelectedRow else {
                     return
                 }
-                tableView.reloadRows(at: [index], with: .none)
+                // Awful idea, but fixes animation. No, animation: .none didn't work
+                let cell = tableView.cellForRow(at: index) as? ConversionCell
+                cell?.configure(with: dataToShow[index.row])
             })
         }
     }
 
+    
+    // MARK: Keyboard Notifications
+    
+    private func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func unregisterNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification){
+        guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        tableView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification){
+        tableView.contentInset.bottom = 0
+    }
 }
 
 
@@ -77,8 +103,8 @@ extension ConversionsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.scrollToNearestSelectedRow(at: .top, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? ConversionCell {
-            tableView.scrollToNearestSelectedRow(at: .top, animated: true)
             cell.handleSelection()
         }
     }
