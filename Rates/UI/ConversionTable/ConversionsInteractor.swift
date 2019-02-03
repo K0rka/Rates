@@ -29,11 +29,8 @@ class ConversionsInteractor: ConversionsViewInteractorInput {
     
     fileprivate func fetchData() {
         networkProvider.getRates {[weak self] (rates, error) in
-            guard let rates = rates  else {
-                self?.presenter?.didFailToGetRates()
-                return
-            }
-            if let _ = error {
+            guard let rates = rates,
+                    error == nil else {
                 self?.presenter?.didFailToGetRates()
                 return
             }

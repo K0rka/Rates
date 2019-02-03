@@ -195,7 +195,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eYS-UQ-QCY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cAH-tM-HfX"/>
+                    <navigationItem key="navigationItem" title="Rates &amp; Conversions" id="cAH-tM-HfX"/>
                     <connections>
                         <outlet property="errorView" destination="gHG-m4-zZA" id="E6r-Df-cMQ"/>
                         <outlet property="loadingView" destination="Tb3-Sb-w1c" id="ac6-i9-YM1"/>

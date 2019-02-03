@@ -22,10 +22,6 @@ class InitialSetupLauncher: NSObject {
         interactor.dataStorage = dataStorage
         interactor.performSetup()
     }
-    
-    deinit {
-        print("something")
-    }
 }
 
 class InitialSetupInteractor {

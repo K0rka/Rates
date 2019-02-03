@@ -50,6 +50,23 @@ class ConversionInteractorTests: XCTestCase {
         //then
         XCTAssert(presenter.didCallFail)
     }
+    
+    func testStopFetching() {
+        //given
+        provider.shouldSucceed = true
+        let expectation = self.expectation(description: "Wait for timer")
+        interactor.fetchCurrentRates()
+
+        //when
+        interactor.stopUpdatingRates()
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 7, handler: nil)
+
+        //then
+        XCTAssert(presenter.numberOfSuccessfulCalls < 2)
+    }
 }
 
 

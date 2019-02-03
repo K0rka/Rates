@@ -80,7 +80,7 @@ class ConversionPresenterTests: XCTestCase {
         
         //when
         presenter.text(willChangeTo: "56",
-                       for: ConversionRateViewModel(image: nil, rate: 78, code: "One more", name: "String", conversionDelegate: nil))
+                       for: ConversionRateViewModel(image: nil, rate: "78", code: "One more", name: "String", conversionDelegate: nil))
         //then
         XCTAssert(converter.didCallConvert)
         XCTAssertEqual(converter.multiplier, 4)
@@ -92,7 +92,7 @@ class ConversionPresenterTests: XCTestCase {
         
         //when
         presenter.text(willChangeTo: "",
-                       for: ConversionRateViewModel(image: nil, rate: 78, code: "One more", name: "String", conversionDelegate: nil))
+                       for: ConversionRateViewModel(image: nil, rate: "78", code: "One more", name: "String", conversionDelegate: nil))
         //then
         XCTAssert(converter.didCallConvert)
         XCTAssertEqual(converter.multiplier, 0)
@@ -104,12 +104,43 @@ class ConversionPresenterTests: XCTestCase {
         
         //when
         presenter.text(willChangeTo: "",
-                       for: ConversionRateViewModel(image: nil, rate: 78, code: "One wrong code", name: "String", conversionDelegate: nil))
+                       for: ConversionRateViewModel(image: nil, rate: "78", code: "One wrong code", name: "String", conversionDelegate: nil))
         //then
         XCTAssertFalse(converter.didCallConvert)
         XCTAssertFalse(view.didCallShowRates)
     }
     
+    
+    func testViewIsNotResponsible() {
+        //given
+        
+        //when
+        presenter.transitionStarted()
+        presenter.didGet(rates: interactor.currentRates)
+        
+        //then
+        XCTAssertFalse(view.didCallShowRates)
+        
+        //when
+        presenter.transitionEnded()
+        presenter.didGet(rates: interactor.currentRates)
+
+        //then
+        XCTAssert(view.didCallShowRates)
+    }
+    
+    
+    func testViewDidEndEditing() {
+        //given
+        presenter.multiplier = 0
+        
+        //when
+        presenter.viewDidFinishEditing()
+        
+        //then
+        XCTAssertEqual(presenter.multiplier, 1)
+        XCTAssert(view.didCallShowRates)
+    }
 }
 
 final private class MockInteractor: ConversionsViewInteractorInput {
@@ -158,7 +189,7 @@ final private class MockConverter: ConversionViewModelConverter {
     func convert(rates: [CurrencyRate], multiplier: Double, conversionDelegate: CurrencyValueChangeDelegate?) -> [ConversionRateViewModel] {
         didCallConvert = true
         self.multiplier = multiplier
-        return [ConversionRateViewModel(image: nil, rate: 1, code: "Code", name: "Name", conversionDelegate: nil)]
+        return [ConversionRateViewModel(image: nil, rate: "1", code: "Code", name: "Name", conversionDelegate: nil)]
     }
     
 }

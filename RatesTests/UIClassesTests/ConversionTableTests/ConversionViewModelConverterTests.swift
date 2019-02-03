@@ -31,7 +31,7 @@ class ConversionViewModelConverterTests: XCTestCase {
         XCTAssertEqual(viewModels[1].name, "Full code name")
         XCTAssertEqual(viewModels[0].code, "Another")
         XCTAssertEqual(viewModels[0].name, "Another name")
-        XCTAssertEqual(viewModels[0].rate, 2)
+        XCTAssertEqual(viewModels[0].rate, "2")
     }
     
     func testValidConversionWithMultiplier() {
@@ -43,8 +43,8 @@ class ConversionViewModelConverterTests: XCTestCase {
         
         //then
         XCTAssertEqual(viewModels.count, 2)
-        XCTAssertEqual(viewModels[1].rate, 5)
-        XCTAssertEqual(viewModels[0].rate, 10)
+        XCTAssertEqual(viewModels[1].rate, "5")
+        XCTAssertEqual(viewModels[0].rate, "10")
     }
     
     func testValidConversionWithEmptyName() {
@@ -54,7 +54,7 @@ class ConversionViewModelConverterTests: XCTestCase {
                     CurrencyRate(code: "Strange name", rate: 2)]
         let delegate = MockDelegate()
         //when
-        let viewModels = converter.convert(rates: data, multiplier: 5, conversionDelegate: delegate)
+        let viewModels = converter.convert(rates: data, conversionDelegate: delegate)
         
         //then
         XCTAssertEqual(viewModels.count, 3)
@@ -62,13 +62,33 @@ class ConversionViewModelConverterTests: XCTestCase {
         XCTAssertNotNil(viewModels[0].conversionDelegate as? MockDelegate)
         XCTAssertNotNil(viewModels[1].conversionDelegate as? MockDelegate)
         XCTAssertNotNil(viewModels[2].conversionDelegate as? MockDelegate)
-
     }
     
+    func testConversionWithZeroMultiplier() {
+        //given
+        let data = [CurrencyRate(code: "Code", rate: 1),
+                    CurrencyRate(code: "Another", rate: 2)]
+        //when
+        let viewModels = converter.convert(rates: data, multiplier: 0)
+        
+        //then
+        XCTAssertEqual(viewModels.count, 2)
+        XCTAssertEqual(viewModels[1].rate, "")
+        XCTAssertEqual(viewModels[0].rate, "")
+
+    }
 }
 
 
 final private class MockDelegate: CurrencyValueChangeDelegate {
+    func transitionStarted() {
+        
+    }
+    
+    func transitionEnded() {
+        
+    }
+    
     func text(willChangeTo newText: String, for currencyViewModel: ConversionRateViewModel?) {
     }
 }

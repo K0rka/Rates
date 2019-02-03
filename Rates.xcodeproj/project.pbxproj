@@ -12,7 +12,6 @@
 		518D01DD220592810020E8D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 518D01DB220592810020E8D3 /* Main.storyboard */; };
 		518D01DF220592860020E8D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 518D01DE220592860020E8D3 /* Assets.xcassets */; };
 		518D01E2220592860020E8D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 518D01E0220592860020E8D3 /* LaunchScreen.storyboard */; };
-		518D01ED220592860020E8D3 /* RatesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D01EC220592860020E8D3 /* RatesTests.swift */; };
 		518D01F8220592860020E8D3 /* RatesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D01F7220592860020E8D3 /* RatesUITests.swift */; };
 		518D020E220598DD0020E8D3 /* RatesNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D020A220598DD0020E8D3 /* RatesNetworkProvider.swift */; };
 		518D020F220598DD0020E8D3 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D020B220598DD0020E8D3 /* Endpoints.swift */; };
@@ -70,7 +69,6 @@
 		518D01E1220592860020E8D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		518D01E3220592860020E8D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		518D01E8220592860020E8D3 /* RatesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RatesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		518D01EC220592860020E8D3 /* RatesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesTests.swift; sourceTree = "<group>"; };
 		518D01EE220592860020E8D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		518D01F3220592860020E8D3 /* RatesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RatesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		518D01F7220592860020E8D3 /* RatesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesUITests.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 			children = (
 				518D02372206E2800020E8D3 /* UIClassesTests */,
 				518D02322206DDE20020E8D3 /* APITests */,
-				518D01EC220592860020E8D3 /* RatesTests.swift */,
 				518D01EE220592860020E8D3 /* Info.plist */,
 			);
 			path = RatesTests;
@@ -583,7 +580,6 @@
 				518D023E2206F23A0020E8D3 /* ConversionViewModelConverterTests.swift in Sources */,
 				518D023C2206E9670020E8D3 /* ConversionModuleBuilderTests.swift in Sources */,
 				518D02402206F6D50020E8D3 /* ConversionPresenterTests.swift in Sources */,
-				518D01ED220592860020E8D3 /* RatesTests.swift in Sources */,
 				518D02342206DDFA0020E8D3 /* CurrencyRatesMapperTests.swift in Sources */,
 				518D02422206F6E20020E8D3 /* ConversionInteractorTests.swift in Sources */,
 				518D02392206E2AB0020E8D3 /* InitialSetupInteractorTests.swift in Sources */,
