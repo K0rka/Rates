@@ -36,6 +36,9 @@
 		518D02362206DE360020E8D3 /* CurrencyInfoMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D02352206DE360020E8D3 /* CurrencyInfoMapperTests.swift */; };
 		518D02392206E2AB0020E8D3 /* InitialSetupInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D02382206E2AB0020E8D3 /* InitialSetupInteractorTests.swift */; };
 		518D023C2206E9670020E8D3 /* ConversionModuleBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D023B2206E9670020E8D3 /* ConversionModuleBuilderTests.swift */; };
+		518D023E2206F23A0020E8D3 /* ConversionViewModelConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D023D2206F23A0020E8D3 /* ConversionViewModelConverterTests.swift */; };
+		518D02402206F6D50020E8D3 /* ConversionPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D023F2206F6D50020E8D3 /* ConversionPresenterTests.swift */; };
+		518D02422206F6E20020E8D3 /* ConversionInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D02412206F6E20020E8D3 /* ConversionInteractorTests.swift */; };
 		5C9260AC18B180EAAA76F991 /* Pods_RatesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBABFE473AF4A3B5ADA924 /* Pods_RatesTests.framework */; };
 		B682D45D78BBE161B5D65CD7 /* Pods_Rates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B2A663F86DC609D2B13AD1 /* Pods_Rates.framework */; };
 /* End PBXBuildFile section */
@@ -94,6 +97,9 @@
 		518D02352206DE360020E8D3 /* CurrencyInfoMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfoMapperTests.swift; sourceTree = "<group>"; };
 		518D02382206E2AB0020E8D3 /* InitialSetupInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialSetupInteractorTests.swift; sourceTree = "<group>"; };
 		518D023B2206E9670020E8D3 /* ConversionModuleBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionModuleBuilderTests.swift; sourceTree = "<group>"; };
+		518D023D2206F23A0020E8D3 /* ConversionViewModelConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionViewModelConverterTests.swift; sourceTree = "<group>"; };
+		518D023F2206F6D50020E8D3 /* ConversionPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionPresenterTests.swift; sourceTree = "<group>"; };
+		518D02412206F6E20020E8D3 /* ConversionInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionInteractorTests.swift; sourceTree = "<group>"; };
 		92AD6ECB28F8382CA7AE4FF7 /* Pods-Rates.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rates.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rates/Pods-Rates.debug.xcconfig"; sourceTree = "<group>"; };
 		AEBD11E4677983000D1C2ADA /* Pods-Rates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rates.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rates/Pods-Rates.release.xcconfig"; sourceTree = "<group>"; };
 		B2B2A663F86DC609D2B13AD1 /* Pods_Rates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +295,9 @@
 			isa = PBXGroup;
 			children = (
 				518D023B2206E9670020E8D3 /* ConversionModuleBuilderTests.swift */,
+				518D023D2206F23A0020E8D3 /* ConversionViewModelConverterTests.swift */,
+				518D023F2206F6D50020E8D3 /* ConversionPresenterTests.swift */,
+				518D02412206F6E20020E8D3 /* ConversionInteractorTests.swift */,
 			);
 			path = ConversionTableTests;
 			sourceTree = "<group>";
@@ -571,9 +580,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				518D02362206DE360020E8D3 /* CurrencyInfoMapperTests.swift in Sources */,
+				518D023E2206F23A0020E8D3 /* ConversionViewModelConverterTests.swift in Sources */,
 				518D023C2206E9670020E8D3 /* ConversionModuleBuilderTests.swift in Sources */,
+				518D02402206F6D50020E8D3 /* ConversionPresenterTests.swift in Sources */,
 				518D01ED220592860020E8D3 /* RatesTests.swift in Sources */,
 				518D02342206DDFA0020E8D3 /* CurrencyRatesMapperTests.swift in Sources */,
+				518D02422206F6E20020E8D3 /* ConversionInteractorTests.swift in Sources */,
 				518D02392206E2AB0020E8D3 /* InitialSetupInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
