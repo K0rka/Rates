@@ -37,8 +37,9 @@ class ConversionsInteractor: ConversionsViewInteractorInput {
                 self?.presenter?.didFailToGetRates()
                 return
             }
-            self?.currentRates = rates
-            self?.presenter?.didGet(rates: rates)
+            // As we don't change base and don't get base back, let's add it manually
+            self?.currentRates = rates+[CurrencyRate(code: "EUR", rate: 1)]
+            self?.presenter?.didGet(rates: rates+[CurrencyRate(code: "EUR", rate: 1)])
         }
     }
     

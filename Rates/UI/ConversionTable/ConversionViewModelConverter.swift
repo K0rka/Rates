@@ -39,17 +39,33 @@ class ConversionViewModelConverterImplementation: ConversionViewModelConverter {
     func convert(rates: [CurrencyRate], multiplier: Double, conversionDelegate: CurrencyValueChangeDelegate?) -> [ConversionRateViewModel] {
         var result = [ConversionRateViewModel]()
         let info = dataStorage.retrieveCurrenciesInfo()
+        
         rates.forEach { (currencyRate) in
+            let rateValue = currencyRate.rate * multiplier
+            let rateString = rateValue > 0 ?
+                rateFormatter().string(from: NSNumber(value: rateValue)) :
+            ""
+            
             let vm = ConversionRateViewModel(image: UIImage(named: currencyRate.code.lowercased()),
-                                             rate: currencyRate.rate * multiplier,
+                                             rate: rateString ?? "",
                                              code: currencyRate.code,
                                              name: info[currencyRate.code] ?? "",
                                              conversionDelegate: conversionDelegate
-                                             )
+            )
             
             result.append(vm)
         }
         
         return result.sorted()
     }
+    
+    private func rateFormatter() -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.decimalSeparator = "."
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 3
+        formatter.numberStyle = .decimal
+        return formatter
+    }
+
 }

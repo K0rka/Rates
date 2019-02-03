@@ -17,6 +17,7 @@ protocol ConversionsViewInput: class {
 protocol ConversionsViewOutput {
     func viewIsReady()
     func viewIsHiding()
+    func viewDidFinishEditing()
 }
 
 protocol ConversionsViewInteractorInput {

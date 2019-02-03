@@ -25,6 +25,14 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
         interactor.stopUpdatingRates()
     }
     
+    func viewDidFinishEditing() {
+        if multiplier == 0 {
+            multiplier = 1
+            didGet(rates: interactor.currentRates)
+        }
+    }
+
+    
     func didFailToGetRates() {
         view.showNoResultsView()
     }

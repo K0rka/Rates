@@ -10,7 +10,7 @@ import UIKit
 
 struct ConversionRateViewModel {
     let image: UIImage?
-    let rate: Double
+    let rate: String
     let code: String
     let name: String
     let conversionDelegate: CurrencyValueChangeDelegate?

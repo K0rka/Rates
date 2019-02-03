@@ -114,5 +114,6 @@ extension ConversionsViewController: UITableViewDelegate, UITableViewDataSource 
             tableView.deselectRow(at: selectedIndex, animated: false)
         }
         scrollView.endEditing(true)
+        presenter.viewDidFinishEditing()
     }
 }
