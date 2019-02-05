@@ -144,6 +144,7 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="afG-lV-zap" firstAttribute="top" secondItem="SX8-BK-K5a" secondAttribute="bottom" constant="5" id="0I1-jx-j92"/>
                                                 <constraint firstItem="70V-UQ-nEu" firstAttribute="top" secondItem="OnJ-65-EYF" secondAttribute="top" id="0jb-TP-Eaq"/>
@@ -164,6 +165,7 @@
                                                 <constraint firstItem="79u-me-t7n" firstAttribute="leading" secondItem="OnJ-65-EYF" secondAttribute="trailing" constant="15" id="vFu-0S-VAW"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="currencyCodeLabel" destination="70V-UQ-nEu" id="qfa-Uz-skS"/>
                                             <outlet property="currencyImageView" destination="OnJ-65-EYF" id="gD0-bD-OxT"/>

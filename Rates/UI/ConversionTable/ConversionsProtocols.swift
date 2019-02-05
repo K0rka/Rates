@@ -12,12 +12,14 @@ protocol ConversionsViewInput: class {
     func showNoResultsView()
     func showLoading()
     func show(rates: [ConversionRateViewModel])
+    func updateDataSource(rates: [ConversionRateViewModel])
 }
 
 protocol ConversionsViewOutput {
     func viewIsReady()
     func viewIsHiding()
     func viewDidFinishEditing()
+    func wantToEdit(conversionModel: ConversionRateViewModel)
 }
 
 protocol ConversionsViewInteractorInput {

@@ -64,7 +64,10 @@ class ConversionsViewController: UIViewController, ConversionsViewInput {
         }
     }
 
-    
+    func updateDataSource(rates: [ConversionRateViewModel]) {
+        dataToShow = rates
+    }
+
     // MARK: Keyboard Notifications
     
     private func registerNotifications() {
@@ -103,8 +106,15 @@ extension ConversionsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.scrollToNearestSelectedRow(at: .top, animated: true)
-        if let cell = tableView.cellForRow(at: indexPath) as? ConversionCell {
+        let zeroIndexPath = IndexPath(row: 0, section: 0)
+        if indexPath.row != 0 {
+            presenter?.wantToEdit(conversionModel: dataToShow[indexPath.row])
+            tableView.moveRow(at: indexPath, to: zeroIndexPath)
+            tableView.deselectRow(at: indexPath, animated: false)
+            tableView.selectRow(at: zeroIndexPath, animated: false, scrollPosition: .none)
+        }
+        tableView.scrollToRow(at: zeroIndexPath, at: .top, animated: true)
+        if let cell = tableView.cellForRow(at: zeroIndexPath) as? ConversionCell {
             cell.handleSelection()
         }
     }

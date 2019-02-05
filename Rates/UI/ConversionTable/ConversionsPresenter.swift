@@ -15,6 +15,7 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
     var converter: ConversionViewModelConverter!
     var multiplier: Double = 1
     var isViewResponsible = true
+    var editingViewModel: ConversionRateViewModel?
     
     func viewIsReady() {
         interactor.fetchCurrentRates()
@@ -32,7 +33,13 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
         }
     }
 
-    
+    func wantToEdit(conversionModel: ConversionRateViewModel) {
+        editingViewModel = conversionModel
+        isViewResponsible = false
+        let data = converter.convert(rates: interactor.currentRates, multiplier: multiplier, conversionDelegate: self, editingViewModel: editingViewModel)
+        view.updateDataSource(rates: data)
+    }
+
     func didFailToGetRates() {
         view.showNoResultsView()
     }
@@ -44,7 +51,7 @@ class ConversionsPresenter: NSObject, ConversionsViewOutput, ConversionsViewInte
             guard isViewResponsible else {
                 return
             }
-            let data = converter.convert(rates: rates, multiplier: multiplier, conversionDelegate: self)
+            let data = converter.convert(rates: rates, multiplier: multiplier, conversionDelegate: self, editingViewModel: editingViewModel)
             view.show(rates: data)
         }
     }
