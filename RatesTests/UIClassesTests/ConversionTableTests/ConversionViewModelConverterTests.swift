@@ -75,6 +75,23 @@ class ConversionViewModelConverterTests: XCTestCase {
         XCTAssertEqual(viewModels.count, 2)
         XCTAssertEqual(viewModels[1].rate, "")
         XCTAssertEqual(viewModels[0].rate, "")
+    }
+    
+    func testConversionWithEditingModel() {
+        //given
+        let data =  [CurrencyRate(code: "Code", rate: 1),
+                CurrencyRate(code: "Another", rate: 2),
+                CurrencyRate(code: "Another one", rate: 32),
+                CurrencyRate(code: "One more", rate: 14)]
+        let viewModelToEdit = ConversionRateViewModel(image: nil, rate: "rate",
+                                                      code: "One more",
+                                                      name: "name", conversionDelegate: nil)
+        //when
+        let viewModels = converter.convert(rates: data, multiplier: 0, conversionDelegate: nil, editingViewModel: viewModelToEdit)
+        
+        //then
+        XCTAssertEqual(viewModels.count, 4)
+        XCTAssertEqual(viewModels[0].code, "One more")
 
     }
 }

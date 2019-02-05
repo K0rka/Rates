@@ -22,6 +22,19 @@ class ConversionPresenterTests: XCTestCase {
         presenter.converter = converter
     }
 
+    func testWantToEdit() {
+        //given
+        let viewModelToEdit = ConversionRateViewModel(image: nil, rate: "rate",
+                                                      code: "One more",
+                                                      name: "name", conversionDelegate: nil)
+        //when
+        presenter.wantToEdit(conversionModel: viewModelToEdit)
+        
+        //then
+        XCTAssert(converter.didCallConvert)
+        XCTAssert(view.didCallUpdateDatasource)
+    }
+    
     func testViewIsReady() {
         //given
         
@@ -165,6 +178,13 @@ final private class MockInteractor: ConversionsViewInteractorInput {
 }
 
 final private class MockView: ConversionsViewInput {
+    var didCallUpdateDatasource = false
+    var updatedSource = [ConversionRateViewModel]()
+    func updateDataSource(rates: [ConversionRateViewModel]) {
+        updatedSource = rates
+        didCallUpdateDatasource = true
+    }
+    
     var didCallShowNoResults = false
     func showNoResultsView() {
         didCallShowNoResults = true
@@ -183,13 +203,14 @@ final private class MockView: ConversionsViewInput {
 }
 
 final private class MockConverter: ConversionViewModelConverter {
-    
-    var multiplier: Double = 0
-    var didCallConvert = false
-    func convert(rates: [CurrencyRate], multiplier: Double, conversionDelegate: CurrencyValueChangeDelegate?) -> [ConversionRateViewModel] {
+    func convert(rates: [CurrencyRate], multiplier: Double, conversionDelegate: CurrencyValueChangeDelegate?, editingViewModel: ConversionRateViewModel?) -> [ConversionRateViewModel] {
         didCallConvert = true
         self.multiplier = multiplier
         return [ConversionRateViewModel(image: nil, rate: "1", code: "Code", name: "Name", conversionDelegate: nil)]
+
     }
+    
+    var multiplier: Double = 0
+    var didCallConvert = false
     
 }
